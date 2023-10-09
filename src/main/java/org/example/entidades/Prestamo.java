@@ -5,6 +5,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,4 +28,11 @@ public class Prestamo implements Serializable {
 
     @Column(name = "fecha_devolucion")
     private Date fechaDevolucion;
+
+    @ManyToMany
+    @JoinTable(
+      name = "prestamo_libro", 
+      joinColumns = @JoinColumn(name = "prestamo_codigo"), 
+      inverseJoinColumns = @JoinColumn(name = "libro_isbn"))
+    private List<Libro> libros;
 }
